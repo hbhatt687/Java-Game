@@ -8,8 +8,7 @@ public class HUD {
 	public static int HEALTH = 100; 		// will not have to initialize health later
 	
 	public void tick() {
-		HEALTH--;
-		
+
 		HEALTH = Game.clamp(HEALTH, 0, 100);
 	}
 	
