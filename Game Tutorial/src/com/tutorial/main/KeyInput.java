@@ -34,20 +34,10 @@ public class KeyInput extends KeyAdapter {
 				}
 			}
 			
-			if (tempObject.getId() == ID.Player2) {
-				if(key == KeyEvent.VK_UP) { // if we hit W, move object up by 1
-					tempObject.setVelY(-5);
-				}
-				if(key == KeyEvent.VK_DOWN) {
-					tempObject.setVelY(5);
-				}
-				if(key == KeyEvent.VK_RIGHT) {
-					tempObject.setVelX(5);
-				}
-				if(key == KeyEvent.VK_LEFT) {
-					tempObject.setVelX(-5);
-				}
-			}
+		}
+		
+		if(key == KeyEvent.VK_ESCAPE) { // hit escape to exit
+			System.exit(1);
 		}
 		
 	}
@@ -75,20 +65,6 @@ public class KeyInput extends KeyAdapter {
 				}
 			}
 			
-			if (tempObject.getId() == ID.Player2) {
-				if(key == KeyEvent.VK_UP) { // if we hit W, move object up by 1
-					tempObject.setVelY(0);
-				}
-				if(key == KeyEvent.VK_DOWN) {
-					tempObject.setVelY(0);
-				}
-				if(key == KeyEvent.VK_RIGHT) {
-					tempObject.setVelX(0);
-				}
-				if(key == KeyEvent.VK_LEFT) {
-					tempObject.setVelX(0);
-				}
-			}
 		}
 	}
 	
