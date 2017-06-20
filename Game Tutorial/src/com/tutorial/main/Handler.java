@@ -34,8 +34,8 @@ public class Handler {
 			
 			if(tempObject.getId() != ID.Player) {
 				removeObject(tempObject);
-				i--;
-			}
+				i--;							// it is a linked list so compensate
+			}									// for removed items in the list
 		}
 	}
 	
