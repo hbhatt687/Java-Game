@@ -28,6 +28,17 @@ public class Handler {
 		}
 	}
 	
+	public void clearEnemies() {
+		for(int i = 0; i < object.size(); i++) { // renders all of the game objects
+			GameObject tempObject = object.get(i);
+			
+			if(tempObject.getId() != ID.Player) {
+				removeObject(tempObject);
+				i--;
+			}
+		}
+	}
+	
 	/*
 	 * handles adding and removing objects from our list
 	 */
