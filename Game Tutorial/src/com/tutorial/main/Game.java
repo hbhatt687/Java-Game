@@ -111,7 +111,7 @@ public class Game extends Canvas implements Runnable{
 		bs.show();
 	}
 	
-	public static int clamp(int var, int min, int max) { // so we never go past room dimensions
+	public static float clamp(float var, float min, float max) { // so we never go past room dimensions
 		if(var >= max) {
 			return var = max;
 		} else if(var <= min) {

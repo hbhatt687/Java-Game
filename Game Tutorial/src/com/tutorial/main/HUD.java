@@ -5,9 +5,9 @@ import java.awt.Graphics;
 
 public class HUD {
 
-	public static int HEALTH = 100; 		// will not have to initialize health later
+	public static float HEALTH = 100; 		// will not have to initialize health later
 	
-	private int greenValue = 255;			// dynamically change health bar
+	private float greenValue = 255;			// dynamically change health bar
 	
 	private int score = 0;
 	private int level = 1;
@@ -24,8 +24,8 @@ public class HUD {
 	public void render(Graphics g){
 		g.setColor(Color.gray);
 		g.fillRect(15, 15, 200, 32);
-		g.setColor(new Color(75, greenValue, 0));
-		g.fillRect(15, 15, HEALTH * 2, 32);
+		g.setColor(new Color(75, (int)greenValue, 0));
+		g.fillRect(15, 15, (int)HEALTH * 2, 32);
 		g.setColor(Color.white);		// sets border around health bar
 		g.drawRect(15, 15, 200, 32);
 		
