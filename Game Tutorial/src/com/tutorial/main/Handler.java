@@ -6,11 +6,11 @@
 package com.tutorial.main;
 
 import java.awt.Graphics;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class Handler {
 
-	LinkedList<GameObject> object = new LinkedList<GameObject>();
+	ArrayList<GameObject> object = new ArrayList<GameObject>();
 	
 	public void tick() {
 		for(int i = 0; i < object.size(); i++) { // loops through EVERY game object
@@ -32,10 +32,13 @@ public class Handler {
 		for(int i = 0; i < object.size(); i++) { // renders all of the game objects
 			GameObject tempObject = object.get(i);
 			
-			if(tempObject.getId() != ID.Player) {
-				removeObject(tempObject);
-				i--;							// it is a linked list so compensate
-			}									// for removed items in the list
+			if (tempObject.getId() == ID.Player) {
+				object.clear();
+				
+				if (Game.gameState != Game.STATE.End) {
+					addObject(new Player((int) tempObject.getX(), (int)tempObject.getY(), ID.Player, this));
+				}
+			}
 		}
 	}
 	
