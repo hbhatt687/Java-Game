@@ -43,6 +43,10 @@ public class Game extends Canvas implements Runnable{
 		this.addKeyListener(new KeyInput(handler)); // make sure game is "listening" for key
 		this.addMouseListener(menu);
 		
+		// add background music
+		AudioPlayer.load();
+		AudioPlayer.getMusic("music").loop();
+		
 		new Window(WIDTH, HEIGHT, "Dodge Block", this);
 		
 		spawner = new Spawn(handler, hud);
@@ -98,7 +102,7 @@ public class Game extends Canvas implements Runnable{
 	    	 
 	    	 if(System.currentTimeMillis() - timer > 1000) {
 	    		 timer += 1000;
-	    		 System.out.println("FPS " + frames);
+	    		// System.out.println("FPS " + frames);
 	    		 frames = 0;
 	    	 }
 	     }
