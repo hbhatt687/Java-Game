@@ -3,12 +3,15 @@ package com.tutorial.main;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.Random;
 
 public class HardEnemy extends GameObject{
 	
 	private Handler handler;
 	private Random r = new Random();
+	
+	private BufferedImage hardEnemy_image;
 
 	public HardEnemy(int x, int y, ID id, Handler handler) {
 		super(x, y, id);
@@ -18,6 +21,10 @@ public class HardEnemy extends GameObject{
 		velX = 5;
 		velY = 5;
 		
+		// texture for enemy
+		SpriteSheet ss = new SpriteSheet(Game.sprite_sheet);
+				
+		hardEnemy_image = ss.grabImage(1, 4, 16, 16);
 	}
 	
 	public Rectangle getBounds() {	// hit box
@@ -51,8 +58,9 @@ public class HardEnemy extends GameObject{
 
 	
 	public void render(Graphics g) {
-		g.setColor(Color.yellow);
-		g.fillRect((int)x, (int)y, 16, 16);
+		//g.setColor(Color.yellow);
+		//g.fillRect((int)x, (int)y, 16, 16);
+		g.drawImage(hardEnemy_image, (int)x, (int)y, null);
 		
 	}
 
