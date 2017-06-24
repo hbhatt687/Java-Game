@@ -21,6 +21,11 @@ public class Game extends Canvas implements Runnable{
 	private Thread thread; // how the entire game is going to run in the thread
 	private boolean running = false; // is the thread on or not?
 	
+	public static boolean paused = false;
+	
+	// difficulty of the game; 0 = normal and 1 = hard
+	public int difficulty = 0;
+	
 	private Random r;
 	private Handler handler; // create an instance of the handler
 	private HUD hud;
@@ -29,6 +34,7 @@ public class Game extends Canvas implements Runnable{
 	
 	public enum STATE {		// states for our game
 		Menu,
+		selectDifficulty,
 		Help,
 		Game,
 		End
@@ -40,7 +46,7 @@ public class Game extends Canvas implements Runnable{
 		handler = new Handler();
 		hud = new HUD();
 		menu = new Menu(this, handler, hud);
-		this.addKeyListener(new KeyInput(handler)); // make sure game is "listening" for key
+		this.addKeyListener(new KeyInput(handler, this)); // make sure game is "listening" for key
 		this.addMouseListener(menu);
 		
 		// add background music
@@ -49,7 +55,7 @@ public class Game extends Canvas implements Runnable{
 		
 		new Window(WIDTH, HEIGHT, "Dodge Block", this);
 		
-		spawner = new Spawn(handler, hud);
+		spawner = new Spawn(handler, hud, this);
 		r = new Random();
 		
 		if (gameState == STATE.Game) {		// only if in game state
@@ -110,23 +116,26 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	private void tick() {
-		handler.tick();
 		if(gameState == STATE.Game) {		// update only if in game
-			hud.tick();
-			spawner.tick();
-			
-			if (HUD.HEALTH <= 0) {
-				HUD.HEALTH = 100;
-				gameState = STATE.End;
-				handler.clearEnemies();
-				for (int i = 0; i < 15; i++) {
-					handler.addObject(new MenuParticle(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.MenuParticle, handler)); // added an individual player object!
-
+			// if the game is not paused, continue as normal
+			if (!paused) {
+				hud.tick();
+				spawner.tick();
+				handler.tick();
+				
+				if (HUD.HEALTH <= 0) {
+					HUD.HEALTH = 100;
+					gameState = STATE.End;
+					handler.clearEnemies();
+					for (int i = 0; i < 15; i++) {
+						handler.addObject(new MenuParticle(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.MenuParticle, handler)); // added an individual player object!
+					}
 				}
 			}
-			
-		}else if(gameState == STATE.Menu || gameState == STATE.End) {
+		} else if (gameState == STATE.Menu || gameState == STATE.End 
+				|| gameState == STATE.selectDifficulty) {
 			menu.tick();
+			handler.tick();
 		}
 	}
 	
@@ -144,9 +153,16 @@ public class Game extends Canvas implements Runnable{
 		
 		handler.render(g);
 		
+		// display paused
+		if (paused) {
+			g.setColor(Color.white);
+			g.drawString("PAUSED", 100, 100);
+		}
+		
 		if(gameState == STATE.Game) {	// render only if in game
 			hud.render(g);
-		}else if(gameState == STATE.Menu || gameState == STATE.Help || gameState == STATE.End) {
+		}else if(gameState == STATE.Menu || gameState == STATE.Help 
+				|| gameState == STATE.End || gameState == STATE.selectDifficulty) {
 			menu.render(g);
 		}
 		
