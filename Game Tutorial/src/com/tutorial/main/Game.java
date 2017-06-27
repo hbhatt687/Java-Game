@@ -33,11 +33,13 @@ public class Game extends Canvas implements Runnable{
 	private HUD hud;
 	private Spawn spawner;
 	private Menu menu;
+	private Shop shop;
 	
 	public enum STATE {		// states for our game
 		Menu,
 		selectDifficulty,
 		Help,
+		Shop,
 		Game,
 		End
 	};
@@ -55,9 +57,11 @@ public class Game extends Canvas implements Runnable{
 		
 		handler = new Handler();
 		hud = new HUD();
+		shop = new Shop(handler, hud);
 		menu = new Menu(this, handler, hud);
 		this.addKeyListener(new KeyInput(handler, this)); // make sure game is "listening" for key
 		this.addMouseListener(menu);
+		this.addMouseListener(shop);
 		
 		// add background music
 		AudioPlayer.load();
@@ -161,8 +165,6 @@ public class Game extends Canvas implements Runnable{
 		g.setColor(Color.black);		// background color
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
-		handler.render(g);
-		
 		// display paused
 		if (paused) {
 			g.setColor(Color.white);
@@ -171,9 +173,13 @@ public class Game extends Canvas implements Runnable{
 		
 		if(gameState == STATE.Game) {	// render only if in game
 			hud.render(g);
-		}else if(gameState == STATE.Menu || gameState == STATE.Help 
+			handler.render(g);
+		} else if (gameState == STATE.Shop) {
+			shop.render(g);
+		} else if (gameState == STATE.Menu || gameState == STATE.Help 
 				|| gameState == STATE.End || gameState == STATE.selectDifficulty) {
 			menu.render(g);
+			handler.render(g);
 		}
 		
 		

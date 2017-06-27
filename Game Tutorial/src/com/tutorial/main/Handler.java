@@ -12,6 +12,8 @@ public class Handler {
 
 	ArrayList<GameObject> object = new ArrayList<GameObject>();
 	
+	public int speed = 5;
+	
 	public void tick() {
 		for(int i = 0; i < object.size(); i++) { // loops through EVERY game object
 			GameObject tempObject = object.get(i); // allows us to get ID of what object we are at

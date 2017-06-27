@@ -195,11 +195,11 @@ public class Menu extends MouseAdapter{
 			
 			g.setFont(fnt);
 			g.setColor(Color.white);
-			g.drawString("SELECT DIFFICULTY", 140, 70);
+			g.drawString("SELECT DIFFICULTY", 80, 70);
 			
 			g.setFont(fnt2);
 			g.drawRect(210, 150, 200, 64);
-			g.drawString("Normal", 270, 190);
+			g.drawString("Normal", 260, 190);
 			
 			g.drawRect(210, 250, 200, 64);
 			g.drawString("Hard", 270, 290);
