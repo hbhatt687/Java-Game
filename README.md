@@ -10,6 +10,7 @@ You will need a machine running MacOS or Windows in order to download an play th
 ## Built With
 * JAVA
 * [Paint.NET](https://www.getpaint.net) - Used to create sprite sheets for characters.
+* [JarSplice](http://ninjacave.com/jarsplice) - Helped create proper executable file for the game.
 ## Authors
 * Harsh Bhatt
 ## Acknowledgements
