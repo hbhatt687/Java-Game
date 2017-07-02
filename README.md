@@ -5,13 +5,16 @@ This is my first game written in java. The object is to dodge incoming blocks an
 You will need a machine Windows in order to download and play the game. I have provided an exectuable jar file for you to download. 
 ### Installing
 ```
-Download Dodge Block.rar file
+Download DodgeBlock_V1 executable jar file.
 ```
 ```
-Extract Dodge Block file to any location on your PC.
+Download and extract the resources.rar file anywhere on your PC.
 ```
 ```
-Run the exectuable jar file "Dodge Block"
+Make a new folder on your PC and put DodgeBlock_V1 and the resources folder into the new one
+```
+```
+OR just make sure DodgeBlock_V1 and the resources folder are in the same directory level
 ```
 ## Built With
 * JAVA
