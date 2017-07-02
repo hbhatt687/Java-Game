@@ -11,7 +11,6 @@ import java.util.Random;
  * and renders all of the graphics onto the window.
  * 
  * @author harshbhatt
- *
  */
 public class Game extends Canvas implements Runnable{
 	

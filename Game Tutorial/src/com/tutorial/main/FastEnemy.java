@@ -1,19 +1,31 @@
 package com.tutorial.main;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
+/**
+ * FastEnemy is another enemy type that has a greater speed than
+ * the basic enemy.
+ * 
+ * @author Harsh
+ */
 public class FastEnemy extends GameObject{
 	
+	@SuppressWarnings("unused")
 	private Handler handler;
-	
 	private BufferedImage fastEnemy_image;
 
+	/**
+	 * Constructor for the fast enemy, creates its attributes.
+	 * 
+	 * @param x is the width.
+	 * @param y is the height.
+	 * @param id is the enum type it relates to.
+	 * @param handler will handle the operations relating to its movement.
+	 */
 	public FastEnemy(int x, int y, ID id, Handler handler) {
 		super(x, y, id);
-		
 		this.handler = handler;
 		
 		velX = 2;
@@ -21,16 +33,21 @@ public class FastEnemy extends GameObject{
 		
 		// texture for enemy
 		SpriteSheet ss = new SpriteSheet(Game.sprite_sheet);
-		
 		fastEnemy_image = ss.grabImage(1, 3, 16, 16);
-		
 	}
 	
-	public Rectangle getBounds() {	// hit box
+	/*
+	 * (non-Javadoc)
+	 * @see com.tutorial.main.GameObject#getBounds()
+	 */
+	public Rectangle getBounds() {
 		return new Rectangle((int)x, (int)y, 16, 16);
 	}
 
-	
+	/*
+	 * (non-Javadoc)
+	 * @see com.tutorial.main.GameObject#tick()
+	 */
 	public void tick() {
 		x += velX;
 		y += velY;
@@ -42,15 +59,14 @@ public class FastEnemy extends GameObject{
 			velX *= -1;
 		}
 		
-		//handler.addObject(new Trail(x, y, ID.Trail, Color.CYAN, 16, 16, 0.02f, handler));
-		
 	}
 
-	
+	/*
+	 * (non-Javadoc)
+	 * @see com.tutorial.main.GameObject#render(java.awt.Graphics)
+	 */
 	public void render(Graphics g) {
-		//g.setColor(Color.CYAN);
-		//g.fillRect((int)x, (int)y, 16, 16);
-		g.drawImage(fastEnemy_image, (int)x, (int)y, null);
+	g.drawImage(fastEnemy_image, (int)x, (int)y, null);
 	}
 
 }

@@ -6,16 +6,29 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+/**
+ * This is a harder enemy than the basic enemy, 
+ * its purpose is to chase the player instead of bouncing
+ * around randomly. 
+ * 
+ * @author Harsh
+ */
 public class HardEnemy extends GameObject{
-	
 	private Handler handler;
 	private Random r = new Random();
-	
 	private BufferedImage hardEnemy_image;
-
+	
+	/**
+	 * Constructor for the Hard enemy, giving it its
+	 * attributes. 
+	 * 
+	 * @param x is the width.
+	 * @param y is the height.
+	 * @param id is the enum type.
+	 * @param handler is going to handle the movements/graphics.
+	 */
 	public HardEnemy(int x, int y, ID id, Handler handler) {
 		super(x, y, id);
-		
 		this.handler = handler;
 		
 		velX = 5;
@@ -23,20 +36,27 @@ public class HardEnemy extends GameObject{
 		
 		// texture for enemy
 		SpriteSheet ss = new SpriteSheet(Game.sprite_sheet);
-				
 		hardEnemy_image = ss.grabImage(1, 4, 16, 16);
 	}
 	
-	public Rectangle getBounds() {	// hit box
+	/*
+	 * (non-Javadoc)
+	 * @see com.tutorial.main.GameObject#getBounds()
+	 */
+	public Rectangle getBounds() {
 		return new Rectangle((int)x, (int)y, 16, 16);
 	}
 
-	
+	/*
+	 * (non-Javadoc)
+	 * @see com.tutorial.main.GameObject#tick()
+	 */
 	public void tick() {
 		x += velX;
 		y += velY;
 		
-		if(y <= 0 || y >= Game.HEIGHT - 32) { // bounces the enemy
+		// bounces the enemy
+		if (y <= 0 || y >= Game.HEIGHT - 32) { 
 			if (velY < 0) {
 				velY = -(r.nextInt(7) + 1) * -1;
 			} else {
@@ -44,7 +64,8 @@ public class HardEnemy extends GameObject{
 			}
 		}
 		
-		if(x <= 0 || x >= Game.WIDTH - 16) { // bounces the enemy
+		// bounces the enemy
+		if (x <= 0 || x >= Game.WIDTH - 16) {
 			if (velX < 0) {
 				velX = -(r.nextInt(7) + 1) * -1;
 			} else {
@@ -52,16 +73,15 @@ public class HardEnemy extends GameObject{
 			}
 		}
 		
-		handler.addObject(new Trail(x, y, ID.Trail, Color.yellow, 16, 16, 0.02f, handler));
-		
+		handler.addObject(new Trail(x, y, ID.Trail,
+				Color.yellow, 16, 16, 0.02f, handler));	
 	}
 
-	
+	/*
+	 * (non-Javadoc)
+	 * @see com.tutorial.main.GameObject#render(java.awt.Graphics)
+	 */
 	public void render(Graphics g) {
-		//g.setColor(Color.yellow);
-		//g.fillRect((int)x, (int)y, 16, 16);
 		g.drawImage(hardEnemy_image, (int)x, (int)y, null);
-		
 	}
-
 }
