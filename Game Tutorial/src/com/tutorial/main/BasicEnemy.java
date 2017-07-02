@@ -16,8 +16,8 @@ public class BasicEnemy extends GameObject{
 	/**
 	 * Constructor for the basic enemy that specifies its attributes.
 	 * 
-	 * @param x is the width
-	 * @param y is the height
+	 * @param x is the x-axis spawn location.
+	 * @param y is the y-axis spawn location.
 	 * @param id is the enum it relates to 
 	 * @param handler will handle its operation
 	 */

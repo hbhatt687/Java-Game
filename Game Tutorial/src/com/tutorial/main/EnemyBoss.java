@@ -21,8 +21,8 @@ public class EnemyBoss extends GameObject{
 	/**
 	 * Constructor for the enemy boss.
 	 * 
-	 * @param x is the width.
-	 * @param y is the height.
+	 * @param x is the x-axis spawn location.
+	 * @param y is the y-axis spawn location.
 	 * @param id is the enum type it relates to.
 	 * @param handler will handle this object's operations.
 	 */

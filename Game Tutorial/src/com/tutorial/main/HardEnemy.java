@@ -23,8 +23,8 @@ public class HardEnemy extends GameObject{
 	 * Constructor for the Hard enemy, giving it its
 	 * attributes. 
 	 * 
-	 * @param x is the width.
-	 * @param y is the height.
+	 * @param x is the x-axis spawn location.
+	 * @param y is the y-axis spawn location.
 	 * @param id is the enum type.
 	 * @param handler is going to handle the movements/graphics.
 	 */
