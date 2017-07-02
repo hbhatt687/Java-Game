@@ -5,6 +5,11 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.Random;
 
+/**
+ * This class has the attributes for the enemy boss.
+ * 
+ * @author Harsh
+ */
 public class EnemyBoss extends GameObject{
 	
 	private Handler handler;
@@ -12,10 +17,17 @@ public class EnemyBoss extends GameObject{
 	
 	private int timer = 80;
 	private int timer2 = 50;
-
+	
+	/**
+	 * Constructor for the enemy boss.
+	 * 
+	 * @param x is the width.
+	 * @param y is the height.
+	 * @param id is the enum type it relates to.
+	 * @param handler will handle this object's operations.
+	 */
 	public EnemyBoss(int x, int y, ID id, Handler handler) {
 		super(x, y, id);
-		
 		this.handler = handler;
 		
 		velX = 0;
@@ -23,60 +35,65 @@ public class EnemyBoss extends GameObject{
 		
 	}
 	
-	public Rectangle getBounds() {	// hit box
+	/**
+	 * @return the rectangle's hit box.
+	 */
+	public Rectangle getBounds() {
 		return new Rectangle((int)x, (int)y, 96, 96);
 	}
 
-	
+	/**
+	 * Essentially deals with the boss's movements.
+	 */
 	public void tick() {
 		x += velX;
 		y += velY;
 		
-		if(timer <= 0) {		// stops the boss in the screen
+		// stops the boss in the screen
+		if (timer <= 0) {		
 			velY = 0;
 		} else {
 			timer--;
 		}
 		
-		if(timer <= 0) {
+		if (timer <= 0) {
 			timer2--;
 		}
-		if(timer2 <= 0) {		// begin boss's abilities
-			if(velX == 0) {
+		
+		// begin boss's abilities
+		if (timer2 <= 0) {		
+			if (velX == 0) {
 				velX = 2;
 			}
 			
-			if(velX > 0) {
+			if (velX > 0) {
 				velX += 0.005f;
-			} else if(velX < 0) {
+			} else if (velX < 0) {
 				velX -= 0.005f;
 			}
 			
 			velX = Game.clamp(velX, -10, 10);
 			
 			int spawn = r.nextInt(10);
-			if(spawn == 0) {
-				handler.addObject(new EnemyBossBullet((int)x + 48, (int)y + 48, ID.BasicEnemy, handler));
+			if (spawn == 0) {
+				handler.addObject(new EnemyBossBullet((int)x + 48,
+						(int)y + 48, ID.BasicEnemy, handler));
 			}
 		}
-		
-		/*
-		if(y <= 0 || y >= Game.HEIGHT - 32) { // bounces the enemy
-			velY *= -1;
-		}*/
-		if(x <= 0 || x >= Game.WIDTH - 96) { // bounces the enemy
+	
+		 // bounces the enemy
+		if (x <= 0 || x >= Game.WIDTH - 96) {
 			velX *= -1;
 		}
 		
-		//handler.addObject(new Trail(x, y, ID.Trail, Color.ORANGE, 96, 96, 0.008f, handler));
-		
 	}
 
-	
+	/**
+	 * This deals with the graphics of the enemy boss.
+	 */
 	public void render(Graphics g) {
 		g.setColor(Color.ORANGE);
 		g.fillRect((int)x, (int)y, 96, 96);
-		
 	}
 
 }

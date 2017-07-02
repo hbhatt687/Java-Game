@@ -1,6 +1,5 @@
 package com.tutorial.main;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -12,7 +11,6 @@ import java.awt.image.BufferedImage;
  *
  */
 public class BasicEnemy extends GameObject{
-	private Handler handler;
 	private BufferedImage enemy_image;
 
 	/**
@@ -25,8 +23,6 @@ public class BasicEnemy extends GameObject{
 	 */
 	public BasicEnemy(int x, int y, ID id, Handler handler) {
 		super(x, y, id);
-		
-		this.handler = handler;
 		
 		velX = 5;
 		velY = 5;
