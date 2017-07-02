@@ -9,27 +9,50 @@ import java.util.Random;
 
 import com.tutorial.main.Game.STATE;
 
+/**
+ * This menu will be the first thing the player sees when 
+ * starting up the game. It will have a Play, Help, 
+ * and Quit option. 
+ * 
+ * @author Harsh
+ */
 public class Menu extends MouseAdapter{
-	
 	private Game game;
 	private Handler handler;
 	private HUD hud;
 	private Random r = new Random();
 	
+	/**
+	 * The constructor for the menu. 
+	 * 
+	 * @param game
+	 * @param handler will handle the operations pertaining to
+	 * the menu.
+	 * 
+	 * @param hud will be needed here to remove it if the 
+	 * player is in the menu screen after playing the game.
+	 */
 	public Menu(Game game, Handler handler, HUD hud) {
 		this.game = game;
 		this.handler = handler;
 		this.hud = hud;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see java.awt.event.MouseAdapter#mousePressed(java.awt.event.MouseEvent)
+	 */
 	public void mousePressed(MouseEvent e) {
-		int mx = e.getX();		// stores x and y positions into variables
+		// stores x and y positions into variables
+		int mx = e.getX();		
 		int my = e.getY();
 		
-		if(game.gameState == STATE.Menu) {   // makes sure we are in menu and not in some game
+		// makes sure we are in menu and not in some game
+		if (Game.gameState == STATE.Menu) {   
 			// play button
-			if(mouseOver(mx, my, 210, 150, 200, 64)) { 		// change game state to game
-				game.gameState = STATE.selectDifficulty;
+			// change game state to game
+			if (mouseOver(mx, my, 210, 150, 200, 64)) { 		
+				Game.gameState = STATE.selectDifficulty;
 				
 				// play sound bite
 				AudioPlayer.getSound("menu").play();
@@ -38,23 +61,25 @@ public class Menu extends MouseAdapter{
 			}
 			
 			// help button
-			if(mouseOver(mx, my, 210, 250, 200, 64)) {
-				game.gameState = STATE.Help;
+			if (mouseOver(mx, my, 210, 250, 200, 64)) {
+				Game.gameState = STATE.Help;
 				
 				// play sound bite
 				AudioPlayer.getSound("menu").play();
 			}
 			
 			// quit button
-			if(mouseOver(mx, my, 210, 350, 200, 64)) {
+			if (mouseOver(mx, my, 210, 350, 200, 64)) {
 				System.exit(1);
 			}
 		}
 		
-		if(game.gameState == STATE.selectDifficulty) {   // makes sure we are in menu and not in some game
+		// makes sure we are in menu and not in some game
+		if (Game.gameState == STATE.selectDifficulty) {   
 			// normal button
-			if(mouseOver(mx, my, 210, 150, 200, 64)) { 		// change game state to game
-				game.gameState = STATE.Game;
+			// change game state to game
+			if (mouseOver(mx, my, 210, 150, 200, 64)) { 
+				Game.gameState = STATE.Game;
 				handler.addObject(new Player(Game.WIDTH/2-32, Game.HEIGHT/2-32, ID.Player, handler)); // added an individual player object
 				handler.clearEnemies();
 				handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH - 50), r.nextInt(Game.HEIGHT - 50), ID.BasicEnemy, handler));
@@ -66,8 +91,8 @@ public class Menu extends MouseAdapter{
 			}
 			
 			// hard button
-			if(mouseOver(mx, my, 210, 250, 200, 64)) {
-				game.gameState = STATE.Game;
+			if (mouseOver(mx, my, 210, 250, 200, 64)) {
+				Game.gameState = STATE.Game;
 				handler.addObject(new Player(Game.WIDTH/2-32, Game.HEIGHT/2-32, ID.Player, handler)); // added an individual player object
 				handler.clearEnemies();
 				handler.addObject(new HardEnemy(r.nextInt(Game.WIDTH - 50), r.nextInt(Game.HEIGHT - 50), ID.BasicEnemy, handler));
@@ -79,8 +104,8 @@ public class Menu extends MouseAdapter{
 			}
 			
 			// back button
-			if(mouseOver(mx, my, 210, 350, 200, 64)) {
-				game.gameState = STATE.Menu;
+			if (mouseOver(mx, my, 210, 350, 200, 64)) {
+				Game.gameState = STATE.Menu;
 				
 				// play sound bite
 				AudioPlayer.getSound("menu").play();
@@ -91,9 +116,10 @@ public class Menu extends MouseAdapter{
 		
 		
 		// back button for help
-		if(game.gameState == STATE.Help) {
-			if(mouseOver(mx, my, 210, 350, 200, 64)) { 	// returns us to the main menu
-				game.gameState = STATE.Menu;
+		if (Game.gameState == STATE.Help) {
+			// returns us to the main menu
+			if (mouseOver(mx, my, 210, 350, 200, 64)) { 	
+				Game.gameState = STATE.Menu;
 				
 				// play sound bite
 				AudioPlayer.getSound("menu").play();
@@ -103,9 +129,10 @@ public class Menu extends MouseAdapter{
 		}
 		
 		// try again button
-		if(game.gameState == STATE.End) {
-			if(mouseOver(mx, my, 210, 350, 200, 64)) { 	// returns us to the main menu
-				game.gameState = STATE.Menu;
+		if (Game.gameState == STATE.End) {
+			// returns us to the main menu
+			if (mouseOver(mx, my, 210, 350, 200, 64)) { 	
+				Game.gameState = STATE.Menu;
 				
 				// reset the score and level
 				hud.setLevel(1);
@@ -117,16 +144,27 @@ public class Menu extends MouseAdapter{
 		}
 	}
 	
-	public void mouseReleased(MouseEvent e) {
-		
-	}
+	/*
+	 * (non-Javadoc)
+	 * @see java.awt.event.MouseAdapter#mouseReleased(java.awt.event.MouseEvent)
+	 */
+	public void mouseReleased(MouseEvent e) {}
 	
-	// checks to see if you clicked within the box
+	/**
+	 * Checks to see if you clicked within the box
+	 * @param mx player x-axis click location.
+	 * @param my player y-axis click location.
+	 * @param x object x- location.
+	 * @param y object y-location. 
+	 * @param width
+	 * @param height
+	 * @return
+	 */
 	private boolean mouseOver(int mx, int my, int x, int y, int width, int height) {
-		if(mx > x && mx < x + width) {
-			if(my > y && my < y + height) {
+		if (mx > x && mx < x + width) {
+			if (my > y && my < y + height) {
 				return true;
-			}else {
+			} else {
 				return false;
 			}
 		}else {
@@ -134,13 +172,16 @@ public class Menu extends MouseAdapter{
 		}
 	}
 	
+	/**
+	 * Deals with updating the menu.
+	 */
+	public void tick() {}
 	
-	public void tick() {
-		
-	}
-	
+	/**
+	 * Deals with rendering the menu on the screen.
+	 */
 	public void render(Graphics g) {
-		if(game.gameState == STATE.Menu) {
+		if (Game.gameState == STATE.Menu) {
 			Font fnt = new Font("arial", 1, 50);
 			Font fnt2 = new Font("arial", 1, 30);
 			
@@ -157,7 +198,7 @@ public class Menu extends MouseAdapter{
 			
 			g.drawRect(210, 350, 200, 64);
 			g.drawString("Quit", 270, 390);
-		} else if (game.gameState == STATE.Help) {
+		} else if (Game.gameState == STATE.Help) {
 			Font fnt = new Font("arial", 1, 50);
 			Font fnt2 = new Font("arial", 1, 30);
 			Font fnt3 = new Font("arial", 1, 20);
@@ -173,7 +214,7 @@ public class Menu extends MouseAdapter{
 			g.setFont(fnt2);
 			g.drawRect(210, 350, 200, 64);
 			g.drawString("Back", 270, 390);
-		} else if (game.gameState == STATE.End) {
+		} else if (Game.gameState == STATE.End) {
 			Font fnt = new Font("arial", 1, 50);
 			Font fnt2 = new Font("arial", 1, 30);
 			Font fnt3 = new Font("arial", 1, 20);
@@ -189,7 +230,7 @@ public class Menu extends MouseAdapter{
 			g.setFont(fnt2);
 			g.drawRect(210, 350, 200, 64);
 			g.drawString("Retry", 275, 390);
-		} else if (game.gameState == STATE.selectDifficulty) {
+		} else if (Game.gameState == STATE.selectDifficulty) {
 			Font fnt = new Font("arial", 1, 50);
 			Font fnt2 = new Font("arial", 1, 30);
 			
