@@ -5,12 +5,24 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
+/**
+ * This will be the default enemy that attacks the player.
+ * 
+ * @author harshbhatt
+ *
+ */
 public class BasicEnemy extends GameObject{
-	
 	private Handler handler;
-	
 	private BufferedImage enemy_image;
 
+	/**
+	 * Constructor for the basic enemy that specifies its attributes.
+	 * 
+	 * @param x is the width
+	 * @param y is the height
+	 * @param id is the enum it relates to 
+	 * @param handler will handle its operation
+	 */
 	public BasicEnemy(int x, int y, ID id, Handler handler) {
 		super(x, y, id);
 		
@@ -21,15 +33,20 @@ public class BasicEnemy extends GameObject{
 		
 		// texture for enemy
 		SpriteSheet ss = new SpriteSheet(Game.sprite_sheet);
-		
 		enemy_image = ss.grabImage(1, 2, 16, 16);
 	}
 	
-	public Rectangle getBounds() {	// hit box
+	/**
+	 * This is the hit box.
+	 */
+	public Rectangle getBounds() {
 		return new Rectangle((int)x, (int)y, 16, 16);
 	}
 
-	
+	/*
+	 * (non-Javadoc)
+	 * @see com.tutorial.main.GameObject#tick()
+	 */
 	public void tick() {
 		x += velX;
 		y += velY;
@@ -39,16 +56,14 @@ public class BasicEnemy extends GameObject{
 		}
 		if(x <= 0 || x >= Game.WIDTH - 16) { // bounces the enemy
 			velX *= -1;
-		}
-		
-		//handler.addObject(new Trail(x, y, ID.Trail, Color.red, 16, 16, 0.02f, handler));
-		
+		}	
 	}
 
-	
+	/*
+	 * (non-Javadoc)
+	 * @see com.tutorial.main.GameObject#render(java.awt.Graphics)
+	 */
 	public void render(Graphics g) {
-		//g.setColor(Color.red);
-		//g.fillRect((int)x, (int)y, 16, 16);
 		g.drawImage(enemy_image, (int)x, (int)y, null);
 	}
 
