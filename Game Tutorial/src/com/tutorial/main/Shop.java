@@ -6,6 +6,13 @@ import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * The shop is where the player can buy upgrades pertaining
+ * to his/her health and speed.
+ * 
+ * @author Harsh
+ *
+ */
 public class Shop extends MouseAdapter {
 	Handler handler;
 	HUD hud;
@@ -14,11 +21,21 @@ public class Shop extends MouseAdapter {
 	private int B2 = 100;
 	private int B3 = 100;
 	
+	/**
+	 * Constructor for the shop and handles its attributes.
+	 * 
+	 * @param handler
+	 * @param hud
+	 */
 	public Shop(Handler handler, HUD hud) {
 		this.handler = handler;
 		this.hud = hud;
 	}
 	
+	/**
+	 * Renders the shop on the screen if the game is in the
+	 * SHOP state.
+	 */
 	public void render(Graphics g) {
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("arial", 0, 48));
@@ -42,11 +59,16 @@ public class Shop extends MouseAdapter {
 		g.drawString("Cost: " + B3, 410, 140);
 		g.drawRect(400, 100, 100, 80);
 		
-		g.drawString("SCORE: " + hud.getScore(), Game.WIDTH / 2 - 50, 300);
-		g.drawString("Press Space to g0 back", Game.WIDTH / 2 - 50, 330);
-
+		g.drawString("SCORE: " + hud.getScore(),
+				Game.WIDTH / 2 - 50, 300);
+		g.drawString("Press Space to go back",
+				Game.WIDTH / 2 - 50, 330);
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see java.awt.event.MouseAdapter#mousePressed(java.awt.event.MouseEvent)
+	 */
 	public void mousePressed(MouseEvent e) {
 		// wherever we press will be stored in mx and my
 		int mx = e.getX();
@@ -82,7 +104,7 @@ public class Shop extends MouseAdapter {
 				// you have selected Box 3
 				if (hud.getScore() >= B3) {
 					hud.setScore(hud.getScore() - B3);
-					hud.HEALTH = (100 + (hud.bounds / 2));
+					HUD.HEALTH = (100 + (hud.bounds / 2));
 				}
 			}
 		}

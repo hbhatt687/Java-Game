@@ -7,9 +7,10 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 /**
- * This is a harder enemy than the basic enemy, 
- * its purpose is to chase the player instead of bouncing
- * around randomly. 
+ * This is a harder enemy than the basic enemy.
+ * Essentially this enemy type will have a 
+ * randomized speed each time it hits the walls
+ * of the game, making it harder to dodge. 
  * 
  * @author Harsh
  */
