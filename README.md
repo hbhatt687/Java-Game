@@ -2,7 +2,7 @@
 This is my first game written in java. The object is to dodge incoming blocks and to survive for as long as possible. You can use upgrades to help you along the way. I still need to implement an end-game.
 ## Getting Started
 ### Prerequisites
-You will need a machine Windows in order to download and play the game. I have provided an exectuable jar file for you to download. You will also need WinRAR in order to open the resources.rar file and extract that folder.
+You will need a machine Windows in order to download and play the game. I have provided an exectuable jar file for you to download. You will also need [WinRAR](http://www.rarlab.com/download.htm) in order to open the resources.rar file and extract that folder.
 ### Installing
 ```
 Download DodgeBlock_V1 executable jar file.
